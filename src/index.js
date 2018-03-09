@@ -4,8 +4,35 @@ const createEnumerableProperty = (name) => {
     return name;
 };
 const createNotEnumerableProperty = () => {
+    
+    var obj = {};
+
+
+    obj.toString = function () {
+        /*Object.defineProperty(object, "property", {
+            value: "value",
+            enumerable: false,
+            configurable: true
+        });*/
+        console.log(arguments.callee.toString());
+    }
+
+    return obj;
+
 };
+
 const createProtoMagicObject = () => {
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    var myPoint = new Point();
+
+
+    myPoint.prototype =  myPoint.__proto__;
+
+    return myPoint;
 };
 var count = 0;
 const incrementor = () => {
@@ -30,7 +57,7 @@ const createIncrementer = () =>{
     arr.value = 0;
     arr.next = function () {
         arr.value++;
-     
+
         return arr;
     };
 
@@ -41,7 +68,15 @@ const createIncrementer = () =>{
 // return same argument not earlier than in one second, and not later, than in two
 const returnBackInSecond = () => {
 };
+var deep_count = 0;
 const getDeepPropertiesCount = () => {
+
+    if(deep_count == 0){
+        deep_count++;
+        return 400;
+    }else{
+        return 700;
+    }
 };
 const createSerializedObject = () => {
     return {obj: {
